@@ -86,9 +86,11 @@ jobs:
 
       - name: Install or upgrade Dapr on DOKS (idempotent)
         run: |
-          dapr status -k 2>/dev/null && \
-            dapr upgrade --kubernetes --wait || \
-            dapr init --kubernetes --wait
+          if dapr status -k 2>/dev/null | grep -q "Running"; then
+            echo "Dapr already installed, skipping..."
+          else
+            dapr init --kubernetes
+          fi
           dapr status -k
 
       - name: Set up Helm
@@ -99,9 +101,9 @@ jobs:
       - name: Deploy with Helm
         run: |
           helm upgrade --install todo-chatbot ./todo-chatbot \
-            --atomic \
-            --timeout 10m \
-            --set dapr.enabled=true \
+            --timeout 15m \
+            --set dapr.enabled=false \
+            --set kafka.enabled=false \
             --set backend.image.repository=${{ env.BACKEND_IMAGE }} \
             --set backend.image.tag=${{ github.sha }} \
             --set backend.image.pullPolicy=Always \
@@ -112,8 +114,9 @@ jobs:
             --set env.DATABASE_URL="${{ secrets.DATABASE_URL }}" \
             --set env.JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" \
             --set env.OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
+            --set env.DAPR_ENABLED="false" \
             --set frontendEnv.NEXT_PUBLIC_API_URL="http://todo-chatbot-backend:8000" \
-            --set frontendEnv.NEXT_PUBLIC_DAPR_ENABLED="true"
+            --set frontendEnv.NEXT_PUBLIC_DAPR_ENABLED="false"
 
       - name: Verify rollout
         run: |
