@@ -59,7 +59,7 @@ jobs:
             ${{ env.FRONTEND_IMAGE }}:latest
             ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
           build-args: |
-            NEXT_PUBLIC_API_URL=http://64.225.84.213:30800
+            NEXT_PUBLIC_API_URL=http://168.144.76.22:30800
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
