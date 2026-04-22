@@ -115,7 +115,7 @@ jobs:
             --set env.JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" \
             --set env.OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
             --set env.DAPR_ENABLED="false" \
-            --set frontendEnv.NEXT_PUBLIC_API_URL="http://todo-chatbot-backend:8000" \
+            --set frontendEnv.NEXT_PUBLIC_API_URL="http://64.225.84.213:30800" \
             --set frontendEnv.NEXT_PUBLIC_DAPR_ENABLED="false"
 
       - name: Verify rollout
