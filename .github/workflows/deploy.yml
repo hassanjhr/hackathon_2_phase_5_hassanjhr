@@ -6,8 +6,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_IMAGE: ghcr.io/${{ github.repository_owner }}/todo-backend
-  FRONTEND_IMAGE: ghcr.io/${{ github.repository_owner }}/todo-frontend
+  BACKEND_IMAGE: ghcr.io/${{ github.repository_owner }}/todo-backend-p5
+  FRONTEND_IMAGE: ghcr.io/${{ github.repository_owner }}/todo-frontend-p5
 
 jobs:
   # ── Job 1: Build and push Docker images to GHCR ─────────────────────────────
