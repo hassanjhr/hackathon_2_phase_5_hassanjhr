@@ -69,7 +69,8 @@ npm run dev
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
 - API Docs: http://localhost:8000/docs
-
+- live link: http://64.225.84.213:3000
+  
 ## Project Structure
 
 ```
